@@ -72,7 +72,7 @@ def he_init(shape, fan_in, seed):
 
     std = he_std(fan_in)
 
-    output = np.random.normal(0, std, shape)
+    output = np.random.normal(0, std, shape).astype('float64')
     
     return output
 
