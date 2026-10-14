@@ -76,8 +76,11 @@ def he_init(shape, fan_in, seed):
     
     return output
 
-# Step 12 - init_zero_bias (not yet solved)
-# TODO: implement
+# Step 12 - init_zero_bias
+import numpy as np
+
+def init_zero_bias(length):
+    return np.zeros(length).astype('float64')
 
 # Step 13 - pad_2d (not yet solved)
 # TODO: implement
