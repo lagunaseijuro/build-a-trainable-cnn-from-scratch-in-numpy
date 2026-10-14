@@ -26,8 +26,11 @@ def row_sum(matrix):
 def exp_shifted(logits):
     return np.exp(logits - row_max(logits))
 
-# Step 5 - stable_softmax (not yet solved)
-# TODO: implement
+# Step 5 - stable_softmax
+def stable_softmax(logits):
+    stable_exp = exp_shifted(logits)
+
+    return stable_exp / row_sum(stable_exp)
 
 # Step 6 - one_hot (not yet solved)
 # TODO: implement
