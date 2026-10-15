@@ -124,8 +124,32 @@ def im2col(images, kernel_h, kernel_w, stride, padding):
     
     return result
 
-# Step 16 - col2im (not yet solved)
-# TODO: implement
+# Step 16 - col2im
+def col2im(cols, input_shape, kernel_h, kernel_w, stride, padding):
+    N, C, H, W = input_shape
+
+    H_out = output_spatial_size(H, kernel_h, stride, padding)
+    W_out = output_spatial_size(W, kernel_w, stride, padding)
+
+    result = np.zeros((N, C, H + 2 * padding, W + 2 * padding), dtype=cols.dtype)
+
+    cols_idx = 0
+    for n in range(N):
+        for idx in range(H_out):
+            for jdx in range(W_out):
+                row_start = stride * idx 
+                row_end = row_start + kernel_h
+                col_start = stride * jdx 
+                col_end = col_start + kernel_w
+
+                window = cols[cols_idx].reshape(C, kernel_h, kernel_w)
+                cols_idx += 1
+
+                result[n, :, row_start:row_end, col_start:col_end] += window
+
+    if padding > 0:
+        return result[:, :, padding:-padding, padding:-padding]
+    return result
 
 # Step 17 - conv2d_forward (not yet solved)
 # TODO: implement
